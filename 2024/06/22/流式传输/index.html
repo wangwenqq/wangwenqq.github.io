@@ -17,25 +17,25 @@
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
   
-  <title>向量数据库 - 个人博客</title>
+  <title>流式传输 - 个人博客</title>
 
   
-    <meta name="description" content="向量数据库分类：  专用向量数据库 关键字和向量结合的检索系统 SQL向量数据库  专用向量数据库例如：Pinecone、Weaviate、Milvus向量检索性能出色，不过通用的数据管理功能较弱 关键字和向量结合的检索系统Elasticsearch、OpenSearch因其完善的关键字检索功能得到广泛生产应用，不过系统资源占用较多，关键字与向量的联合查询精度和性能不尽人如意 SQL向量数据库pg">
+    <meta name="description" content="流式传输是一种允许客户端在服务器产生数据时接收数据的接口。与传统的请求-响应模式不同，流式接口使数据可以实时地传输，而不需要等待整个请求完成。 几种实现方式HTTP流式传输使用 HTTP 持久连接，通过长连接保持客户端和服务器之间的连接。服务器可以持续发送数据片段，客户端可以即时处理接收到的数据 WebSocketWebSocket 是一种在单个 TCP 连接上进行全双工通信的协议 SSE Ser">
 <meta property="og:type" content="article">
-<meta property="og:title" content="向量数据库">
-<meta property="og:url" content="http://example.com/2024/05/27/%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:title" content="流式传输">
+<meta property="og:url" content="http://example.com/2024/06/22/%E6%B5%81%E5%BC%8F%E4%BC%A0%E8%BE%93/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="向量数据库分类：  专用向量数据库 关键字和向量结合的检索系统 SQL向量数据库  专用向量数据库例如：Pinecone、Weaviate、Milvus向量检索性能出色，不过通用的数据管理功能较弱 关键字和向量结合的检索系统Elasticsearch、OpenSearch因其完善的关键字检索功能得到广泛生产应用，不过系统资源占用较多，关键字与向量的联合查询精度和性能不尽人如意 SQL向量数据库pg">
+<meta property="og:description" content="流式传输是一种允许客户端在服务器产生数据时接收数据的接口。与传统的请求-响应模式不同，流式接口使数据可以实时地传输，而不需要等待整个请求完成。 几种实现方式HTTP流式传输使用 HTTP 持久连接，通过长连接保持客户端和服务器之间的连接。服务器可以持续发送数据片段，客户端可以即时处理接收到的数据 WebSocketWebSocket 是一种在单个 TCP 连接上进行全双工通信的协议 SSE Ser">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-27T13:05:12.000Z">
-<meta property="article:modified_time" content="2024-05-27T13:06:38.340Z">
+<meta property="article:published_time" content="2024-06-22T02:32:33.000Z">
+<meta property="article:modified_time" content="2024-06-22T02:34:04.939Z">
 <meta property="article:author" content="wangwenqq">
-<meta property="article:tag" content="向量数据库">
+<meta property="article:tag" content="通用技术">
 <meta name="twitter:card" content="summary">
   
   
   
-  <meta name="keywords" content="向量数据库">
+  <meta name="keywords" content="通用技术">
 
   <!-- feed -->
   
@@ -77,26 +77,99 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-05-27T13:05:12.000Z">2024-05-27</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-05-27T13:06:38.340Z">2024-05-27</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-06-22T02:32:33.000Z">2024-06-22</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-06-22T02:34:04.939Z">2024-06-22</time></span></div></div></div>
     
     <div class="bottom only-title">
       
       <div class="text-area">
-        <h1 class="text title"><span>向量数据库</span></h1>
+        <h1 class="text title"><span>流式传输</span></h1>
         
       </div>
     </div>
     
   </div>
-  </div><article class="md-text content"><h1 id="向量数据库"><a href="#向量数据库" class="headerlink" title="向量数据库"></a>向量数据库</h1><p>分类：</p>
-<ul>
-<li>专用向量数据库</li>
-<li>关键字和向量结合的检索系统</li>
-<li>SQL向量数据库</li>
+  </div><article class="md-text content"><h1 id="流式传输"><a href="#流式传输" class="headerlink" title="流式传输"></a>流式传输</h1><p>是一种允许客户端在服务器产生数据时接收数据的接口。与传统的请求-响应模式不同，流式接口使数据可以实时地传输，而不需要等待整个请求完成。</p>
+<h2 id="几种实现方式"><a href="#几种实现方式" class="headerlink" title="几种实现方式"></a>几种实现方式</h2><h3 id="HTTP流式传输"><a href="#HTTP流式传输" class="headerlink" title="HTTP流式传输"></a>HTTP流式传输</h3><p>使用 HTTP 持久连接，通过长连接保持客户端和服务器之间的连接。服务器可以持续发送数据片段，客户端可以即时处理接收到的数据</p>
+<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><p>WebSocket 是一种在单个 TCP 连接上进行全双工通信的协议</p>
+<h3 id="SSE"><a href="#SSE" class="headerlink" title="SSE"></a>SSE</h3><ul>
+<li>Server-Sent Events，服务器发送事件</li>
+<li>SSE 允许服务器通过 HTTP 向客户端推送实时更新。客户端使用 HTTP 连接接收服务器发来的事件流。</li>
+<li>SSE不支持客户端向服务器发送请求</li>
+<li>每个字段后面跟随一个换行符，整个事件以两个换行符结尾。</li>
+<li>SSE 事件流使用特定的文本格式，每个事件由以下字段组成：<ul>
+<li><code>data</code>: 事件的数据。</li>
+<li><code>id</code>: 事件的唯一标识符（可选）。</li>
+<li><code>event</code>: 事件类型（可选）。</li>
+<li><code>retry</code>: 指定连接断开后重新连接的时间间隔（可选）。</li>
+<li><code>:</code>  :冒号开头是比较特殊的，表示注释（可选）。</li>
 </ul>
-<h2 id="专用向量数据库"><a href="#专用向量数据库" class="headerlink" title="专用向量数据库"></a>专用向量数据库</h2><p>例如：Pinecone、Weaviate、Milvus<br>向量检索性能出色，不过通用的数据管理功能较弱</p>
-<h2 id="关键字和向量结合的检索系统"><a href="#关键字和向量结合的检索系统" class="headerlink" title="关键字和向量结合的检索系统"></a>关键字和向量结合的检索系统</h2><p>Elasticsearch、OpenSearch<br>因其完善的关键字检索功能得到广泛生产应用，不过系统资源占用较多，关键字与向量的联合查询精度和性能不尽人如意</p>
-<h2 id="SQL向量数据库"><a href="#SQL向量数据库" class="headerlink" title="SQL向量数据库"></a>SQL向量数据库</h2><p>pgvector（PostgreSQL 的向量搜索插件）、MyScale AI 数据库<br>基于 SQL 并且数据管理功能强大。不过因为 PostgreSQL 行存的劣势和向量算法的局限性，pgvector 在复杂向量查询中精度较低</p>
+</li>
+</ul>
+<p>以下是一个SSE返回示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">event: message</span><br><span class="line">data: Hello, world!</span><br><span class="line"></span><br><span class="line">data: This is a second message.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="gRPC-流式传输"><a href="#gRPC-流式传输" class="headerlink" title="gRPC 流式传输"></a>gRPC 流式传输</h3><p>gRPC 是一种高性能的 RPC 框架，可以支持双向流式传输。</p>
+<h2 id="HTTP流式传输和Server-Sent-Events-SSE-的区别"><a href="#HTTP流式传输和Server-Sent-Events-SSE-的区别" class="headerlink" title="HTTP流式传输和Server-Sent Events (SSE)的区别"></a>HTTP流式传输和Server-Sent Events (SSE)的区别</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>HTTP 流式传输</th>
+<th>服务器推送事件（SSE）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据格式</td>
+<td>任意（文本或二进制）</td>
+<td>文本事件流，使用特定格式</td>
+</tr>
+<tr>
+<td>实现复杂度</td>
+<td>灵活但需要自定义协议解析</td>
+<td>简单，浏览器原生支持</td>
+</tr>
+<tr>
+<td>通信方向</td>
+<td>单向或双向（通过不同的流）</td>
+<td>单向（服务器到客户端）</td>
+</tr>
+<tr>
+<td>连接管理</td>
+<td>持续的单个连接</td>
+<td>持续的单个连接</td>
+</tr>
+<tr>
+<td>应用场景</td>
+<td>视频流、文件下载、大量数据传输</td>
+<td>实时通知、实时数据更新</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>非常灵活，可以传输任何类型的数据</td>
+<td>简单易用，浏览器原生支持</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>需要自定义解析逻辑</td>
+<td>仅支持单向通信，不支持二进制数据</td>
+</tr>
+</tbody></table>
+<h2 id="HTTP流式传输-1"><a href="#HTTP流式传输-1" class="headerlink" title="HTTP流式传输"></a>HTTP流式传输</h2><ol>
+<li>服务器A，返回generator</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, Response</span><br><span class="line"> </span><br><span class="line">app = Flask(__name__)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">my_generator</span>():</span><br><span class="line">    <span class="comment"># 生成结果的逻辑</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">yield</span> <span class="built_in">str</span>(i)</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/api/endpoint&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">handle_request</span>():</span><br><span class="line">    generator = my_generator()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 返回一个生成器作为响应</span></span><br><span class="line">    <span class="keyword">return</span> Response(generator, mimetype=<span class="string">&#x27;text/plain&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>服务器B，实时接收处理generator</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 发送GET请求</span></span><br><span class="line">response = requests.get(<span class="string">&#x27;http://localhost:5000/api/endpoint&#x27;</span>, stream=<span class="literal">True</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 持续接收并打印生成的结果</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> response.iter_lines():</span><br><span class="line">    <span class="keyword">if</span> line:</span><br><span class="line">        <span class="built_in">print</span>(line.decode())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Server-Sent-Events-SSE"><a href="#Server-Sent-Events-SSE" class="headerlink" title="Server-Sent Events (SSE)"></a>Server-Sent Events (SSE)</h2><p>服务器端：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, Response</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">event_stream</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;生成事件流&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">yield</span> <span class="string">&#x27;data: The current time is &#123;&#125;\n\n&#x27;</span>.<span class="built_in">format</span>(time.strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/stream&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">stream</span>():</span><br><span class="line">    <span class="keyword">return</span> Response(event_stream(), content_type=<span class="string">&#x27;text/event-stream&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>浏览器端</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>SSE Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Server-Sent Events Example<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;time&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 创建一个新的 EventSource 实例</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> eventSource = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="string">&#x27;/stream&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">        </span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 监听消息事件</span></span></span><br><span class="line"><span class="language-javascript">        eventSource.<span class="property">onmessage</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 将接收到的数据展示在页面上</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;time&#x27;</span>).<span class="property">innerText</span> = event.<span class="property">data</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125;;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 错误处理</span></span></span><br><span class="line"><span class="language-javascript">        eventSource.<span class="property">onerror</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;EventSource failed:&quot;</span>, event);</span></span><br><span class="line"><span class="language-javascript">            eventSource.<span class="title function_">close</span>();</span></span><br><span class="line"><span class="language-javascript">        &#125;;</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
 <div class="article-footer fs14">
     <section id="license">
@@ -106,7 +179,7 @@
     </section>
     </div>
 </article>
-<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/05/30/python-setuptools/">python-setuptools</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/05/22/sqlalchemy-alembic/">sqlalchemy-alembic</a></div></section></div>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/06/22/python-overload/">python-overload</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/06/22/huggingface%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">huggingface基本使用</a></div></section></div>
 
 
 
@@ -120,7 +193,7 @@
 
 
 
-<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">向量数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%93%E7%94%A8%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">专用向量数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8C%E5%90%91%E9%87%8F%E7%BB%93%E5%90%88%E7%9A%84%E6%A3%80%E7%B4%A2%E7%B3%BB%E7%BB%9F"><span class="toc-text">关键字和向量结合的检索系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">SQL向量数据库</span></a></li></ol></li></ol></div><div class="widget-footer">
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%81%E5%BC%8F%E4%BC%A0%E8%BE%93"><span class="toc-text">流式传输</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">几种实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E6%B5%81%E5%BC%8F%E4%BC%A0%E8%BE%93"><span class="toc-text">HTTP流式传输</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebSocket"><span class="toc-text">WebSocket</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSE"><span class="toc-text">SSE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gRPC-%E6%B5%81%E5%BC%8F%E4%BC%A0%E8%BE%93"><span class="toc-text">gRPC 流式传输</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E6%B5%81%E5%BC%8F%E4%BC%A0%E8%BE%93%E5%92%8CServer-Sent-Events-SSE-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">HTTP流式传输和Server-Sent Events (SSE)的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E6%B5%81%E5%BC%8F%E4%BC%A0%E8%BE%93-1"><span class="toc-text">HTTP流式传输</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Server-Sent-Events-SSE"><span class="toc-text">Server-Sent Events (SSE)</span></a></li></ol></li></ol></div><div class="widget-footer">
 
 <a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>参与讨论</span></a></div></widget>
 </div></aside><div class='float-panel blur'>
