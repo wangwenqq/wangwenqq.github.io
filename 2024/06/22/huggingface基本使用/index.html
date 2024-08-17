@@ -1,0 +1,718 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.27.0" theme-name="Stellar" theme-version="1.27.0">
+  
+  <meta name="generator" content="Hexo 7.2.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  
+  <title>huggingface基本使用 - 个人博客</title>
+
+  
+    <meta name="description" content="huggingface用法模型下载参考：https:&#x2F;&#x2F;study.hycbook.com&#x2F;article&#x2F;57912 git clone不推荐，不支持断点续传，会下载历史版本，占用空间 huggingface-cli1pip install -U huggingface_hub 下载模型 1huggingface-cli download --resume-download bigscience">
+<meta property="og:type" content="article">
+<meta property="og:title" content="huggingface基本使用">
+<meta property="og:url" content="http://example.com/2024/06/22/huggingface%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="个人博客">
+<meta property="og:description" content="huggingface用法模型下载参考：https:&#x2F;&#x2F;study.hycbook.com&#x2F;article&#x2F;57912 git clone不推荐，不支持断点续传，会下载历史版本，占用空间 huggingface-cli1pip install -U huggingface_hub 下载模型 1huggingface-cli download --resume-download bigscience">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-22T02:28:19.000Z">
+<meta property="article:modified_time" content="2024-06-22T02:29:31.813Z">
+<meta property="article:author" content="wangwenqq">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="AI">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.27.0">
+
+  
+
+  
+
+  
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/a.jpeg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">个人博客</div><div class="sub cap">技术学习分享</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2024/08/17/ollama/"><span class="title">ollama</span></a><a class="item title" href="/2024/08/17/%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/"><span class="title">模型微调技术文档</span></a><a class="item title" href="/2024/08/17/%E9%95%BF%E6%96%87%E6%9C%AC%E6%80%BB%E7%BB%93%E5%AE%9E%E7%8E%B0/"><span class="title">长文本总结实现</span></a><a class="item title" href="/2024/08/17/DDOS%E6%94%BB%E5%87%BB/"><span class="title">DDOS攻击</span></a><a class="item title" href="/2024/08/17/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8A%A0%E9%80%9F%E6%8E%A8%E7%90%86%E6%A1%86%E6%9E%B6-vllm/"><span class="title">大模型加速推理框架-vllm</span></a><a class="item title" href="/2024/08/08/%E5%A4%9AAgent%E6%A1%86%E6%9E%B6-AutoGen/"><span class="title">多Agent框架-AutoGen</span></a><a class="item title" href="/2024/08/07/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/"><span class="title">注意力机制</span></a><a class="item title" href="/2024/06/22/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8/"><span class="title">大模型安全</span></a><a class="item title" href="/2024/06/22/python-overload/"><span class="title">python-overload</span></a><a class="item title" href="/2024/06/22/%E6%B5%81%E5%BC%8F%E4%BC%A0%E8%BE%93/"><span class="title">流式传输</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-06-22T02:28:19.000Z">2024-06-22</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-06-22T02:29:31.813Z">2024-06-22</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>huggingface基本使用</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="huggingface用法"><a href="#huggingface用法" class="headerlink" title="huggingface用法"></a>huggingface用法</h1><h2 id="模型下载"><a href="#模型下载" class="headerlink" title="模型下载"></a>模型下载</h2><p>参考：<a target="_blank" rel="noopener" href="https://study.hycbook.com/article/57912">https://study.hycbook.com/article/57912</a></p>
+<h3 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h3><p>不推荐，不支持断点续传，会下载历史版本，占用空间</p>
+<h3 id="huggingface-cli"><a href="#huggingface-cli" class="headerlink" title="huggingface-cli"></a>huggingface-cli</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -U huggingface_hub</span><br></pre></td></tr></table></figure>
+<p>下载模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">huggingface-cli download --resume-download bigscience/bloom-560m --local-dir bloom-560m</span><br></pre></td></tr></table></figure>
+<p>下载数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">huggingface-cli download --resume-download --repo-type dataset lavita/medical-qa-shared-task-v1-toy</span><br></pre></td></tr></table></figure>
+<p>–local-dir指定的目录中都是一些链接文件，真实模型则存储在~&#x2F;.cache&#x2F;huggingface下，如果不喜欢这个可以用 –local-dir-use-symlinks False取消这个逻辑</p>
+<h2 id="transformers"><a href="#transformers" class="headerlink" title="transformers"></a>transformers</h2><ul>
+<li>transformers可以下载和训练预训练模型</li>
+<li>支持在pytorch、tensorflow进行操作</li>
+</ul>
+<p>安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install transformers datasets</span><br></pre></td></tr></table></figure>
+
+<h3 id="pipline"><a href="#pipline" class="headerlink" title="pipline"></a>pipline</h3><ul>
+<li>是使用预训练模型推理的最简单方法，可以直接用pipline进行推理，涵盖不同模态</li>
+<li>例如：<ul>
+<li><code>pipeline(task=“sentiment-analysis”)</code>:情感分析</li>
+<li><code>pipeline(task=“text-generation”)</code>:文本生成</li>
+<li><code>pipeline(task=“image-to-text”)</code>:图像生成文本</li>
+</ul>
+</li>
+</ul>
+<p>基本使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> pipeline</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(classifier(<span class="string">&quot;We are very happy to show you the 🤗 Transformers library.&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入列表</span></span><br><span class="line">results = classifier([<span class="string">&quot;We are very happy to show you the 🤗 Transformers library.&quot;</span>, <span class="string">&quot;We hope you don&#x27;t hate it.&quot;</span>])</span><br><span class="line"><span class="keyword">for</span> result <span class="keyword">in</span> results:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;label: <span class="subst">&#123;result[<span class="string">&#x27;label&#x27;</span>]&#125;</span>, with score: <span class="subst">&#123;<span class="built_in">round</span>(result[<span class="string">&#x27;score&#x27;</span>], <span class="number">4</span>)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[&#123;&#x27;label&#x27;: &#x27;POSITIVE&#x27;, &#x27;score&#x27;: 0.9998&#125;]</span><br><span class="line">label: POSITIVE, with score: 0.9998</span><br><span class="line">label: NEGATIVE, with score: 0.5309</span><br></pre></td></tr></table></figure>
+
+<h3 id="AtuoClass"><a href="#AtuoClass" class="headerlink" title="AtuoClass"></a>AtuoClass</h3><ol>
+<li>AutoTokenizer</li>
+</ol>
+<ul>
+<li>负责将文本预处理为模型输入的数字数组</li>
+</ul>
+<p>单个输入：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoTokenizer</span><br><span class="line"></span><br><span class="line">model_name = <span class="string">&quot;nlptown/bert-base-multilingual-uncased-sentiment&quot;</span></span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(model_name)</span><br><span class="line"><span class="comment"># return_tensors参数设置为pt以返回适用于PyTorch的张量，</span></span><br><span class="line"><span class="comment"># 设置为tf以返回适用于TensorFlow的张量</span></span><br><span class="line">encoding = tokenizer(<span class="string">&quot;We are very happy to show you the 🤗 Transformers library.&quot;</span>, return_tensors=<span class="string">&quot;pt&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#x27;input_ids&#x27;: [101, 11312, 10320, 12495, 19308, 10114, 11391, 10855, 10103, 100, 58263, 13299, 119, 102],</span><br><span class="line"> &#x27;token_type_ids&#x27;: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],</span><br><span class="line"> &#x27;attention_mask&#x27;: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>input_ids：是输入文本在模型词汇表中的标记（token）的ID。这些ID是词汇表中的索引，表示输入文本被分割成的每个标记。模型使用这些ID来理解输入的内容。101 和 102 是特殊标记，分别表示序列的开始和结束。</p>
+</li>
+<li><p>token_type_ids：用于帮助模型区分输入中的不同句子，特别是在需要比较或关联两个句子的任务中。对于单个句子，这些值通常都是0。对于包含两个句子的输入，前一句的token_type_id为0，后一句的token_type_id为1。</p>
+</li>
+<li><p>attention_mask：用于告诉模型哪些标记是实际内容，哪些是填充（padding）。填充标记（通常是0）告诉模型忽略这些位置上的信息。当你在训练或推理过程中使用批处理时，一个批次中的所有输入序列（句子）需要具有相同的长度。因为神经网络的输入通常是固定尺寸的张量（tensor），所以需要对较短的序列进行填充，使它们与最长的序列长度一致。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tokenizer.decode(encoding[<span class="string">&quot;input_ids&quot;</span>])</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;We are very happy to show you the 🤗 Transformers library.&quot;</span><br></pre></td></tr></table></figure>
+<p>输入列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pt_batch = tokenizer(</span><br><span class="line">    [<span class="string">&quot;We are very happy to show you the 🤗 Transformers library.&quot;</span>, <span class="string">&quot;We hope you don&#x27;t hate it.&quot;</span>],</span><br><span class="line">    padding=<span class="literal">True</span>, <span class="comment"># 填充</span></span><br><span class="line">    truncation=<span class="literal">True</span>, <span class="comment"># 将序列截断为模型所能接受的最大长度</span></span><br><span class="line">    max_length=<span class="number">512</span>,</span><br><span class="line">    return_tensors=<span class="string">&quot;pt&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>AutoModel</li>
+</ol>
+<ul>
+<li>加载预训练模型实例</li>
+<li>对于文本(或序列)分类，应该加载<code>AutoModelForSequenceClassification</code> </li>
+<li>用于问答任务的模型：<code>AutoModelForQuestionAnswering</code></li>
+<li>用于标记分类任务的模型(如命名实体识别): <code>AutoModelForTokenClassification</code> </li>
+<li>用于图像分类任务的模型: <code>AutoModelForImageClassification</code></li>
+<li>用于图像分割任务的模型:<code>AutoModelForImageSegmentation</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoModelForSequenceClassification</span><br><span class="line"></span><br><span class="line">model_name = <span class="string">&quot;nlptown/bert-base-multilingual-uncased-sentiment&quot;</span></span><br><span class="line">pt_model = AutoModelForSequenceClassification.from_pretrained(model_name)</span><br><span class="line"></span><br><span class="line">pt_outputs = pt_model(**pt_batch)  <span class="comment"># 输出表示句子属于某一类别的概率</span></span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="comment"># 使结果在0-1之间，并且所有数和为1</span></span><br><span class="line">pt_predictions = nn.functional.softmax(pt_outputs.logits, dim=-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor([[0.0021, 0.0018, 0.0115, 0.2121, 0.7725],</span><br><span class="line">        [0.2084, 0.1826, 0.1969, 0.1755, 0.2365]], grad_fn=&lt;SoftmaxBackward0&gt;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>其它auto类</li>
+</ol>
+<ul>
+<li>AutoImageProcessor：图像处理器将图像处理为正确的输入格式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">image_processor = AutoImageProcessor.from_pretrained(<span class="string">&quot;google/vit-base-patch16-224&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>模型保存</li>
+</ol>
+<ul>
+<li>一旦模型经过微调，可以使用PreTrainedModel.save_pretrained()将其与其标记器一起保存起来</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 模型+分词器 保存</span></span><br><span class="line">pt_save_directory = <span class="string">&quot;./pt_save_pretrained&quot;</span></span><br><span class="line">tokenizer.save_pretrained(pt_save_directory)</span><br><span class="line">pt_model.save_pretrained(pt_save_directory)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载</span></span><br><span class="line">pt_model = AutoModelForSequenceClassification.from_pretrained(pt_save_directory)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="AutoConfig"><a href="#AutoConfig" class="headerlink" title="AutoConfig"></a>AutoConfig</h3><ul>
+<li>可以修改模型的配置类来更改模型的构建方式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoConfig</span><br><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoModel</span><br><span class="line"></span><br><span class="line">my_config = AutoConfig.from_pretrained(<span class="string">&quot;distilbert-base-uncased&quot;</span>, n_heads=<span class="number">12</span>)</span><br><span class="line">my_model = AutoModel.from_config(my_config)</span><br></pre></td></tr></table></figure>
+
+<h3 id="tokenizer"><a href="#tokenizer" class="headerlink" title="tokenizer"></a>tokenizer</h3><ul>
+<li><p>文本分词是将文本拆分成多个单词或子单词，这些单词或子单词会被映射到特定的ID</p>
+</li>
+<li><p>Transformers库中常用的三种主要分词器类型:Byte-Pair Encoding (BPE)、WordPiece和SentencePiece</p>
+</li>
+<li><p>spaCy and Moses 是两个受欢迎的基于规则的分词器</p>
+</li>
+<li><p>单词级别分词：</p>
+<ul>
+<li>会产生一个非常大的词典</li>
+<li>遇到新的语料时可能会出现OOV（Out-Of-Vocabulary）的情况,即词汇表中没有包含的词汇</li>
+</ul>
+</li>
+<li><p>字符级别分词：</p>
+<ul>
+<li>能极大的减少内存使用，降低时间复杂度，但是这样做会让模型很难学到有意义的输入表达.</li>
+<li>以字符分割，会造成序列长度过长，对后续应用造成较大限制</li>
+</ul>
+</li>
+<li><p>transformers模型在单词级别分词和字符级别分词之间使用了一个折中的方案被称作子词分词：可以很好的平衡词汇量和语义独立性，它的切分准则是常用的词不被切分，而不常见的词切分为子词</p>
+</li>
+<li><p>tokenize有三种粒度：word(词)&#x2F;subword（子词）&#x2F;char（字符）</p>
+</li>
+</ul>
+<ol>
+<li>Byte-Pair Encoding (BPE)</li>
+</ol>
+<ul>
+<li>BPE依赖于一个预分词器，这个预分词器会将训练数据分割成单词。预分词可以是简单的 空格分词等，经过预分词器BPE产生了一个基础词典，包含了集合中所有的符号，也确定了训练数据中每个单词出现的频次</li>
+<li>下一步，BPE学习融合的规则-组合基础词典中的两个符号来形成一个新的符号，一直学习直到词典的大小满足了期望的词典大小的要求</li>
+</ul>
+<ol start="2">
+<li>WordPiece</li>
+<li>Unigram</li>
+<li>SentencePiece</li>
+</ol>
+<h3 id="Trainer"><a href="#Trainer" class="headerlink" title="Trainer"></a>Trainer</h3><p>需要准备以下参数：</p>
+<ol>
+<li><code>PreTrainedModel</code>或<code>torch.nn.Module</code>对象</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoModelForSequenceClassification</span><br><span class="line"></span><br><span class="line">model = AutoModelForSequenceClassification.from_pretrained(<span class="string">&quot;distilbert-base-uncased&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><code>TrainingArguments</code>包含了可以修改的模型超参数，比如学习率、批大小和训练的轮数。如果你不指定任何训练参数，将使用默认值</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> TrainingArguments</span><br><span class="line"></span><br><span class="line">training_args = TrainingArguments(</span><br><span class="line">    output_dir=<span class="string">&quot;path/to/save/folder/&quot;</span>,</span><br><span class="line">    learning_rate=<span class="number">2e-5</span>,</span><br><span class="line">    per_device_train_batch_size=<span class="number">8</span>,</span><br><span class="line">    per_device_eval_batch_size=<span class="number">8</span>,</span><br><span class="line">    num_train_epochs=<span class="number">2</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><code>Preprocessing</code>类，例如<code>tokenizer</code>(标记器)、<code>image processor</code>(图像处理器)、<code>feature extractor</code>(特征提取器)或<code>processor</code>(处理器)</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoTokenizer</span><br><span class="line"></span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;distilbert-base-uncased&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>加载数据集</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datasets <span class="keyword">import</span> load_dataset</span><br><span class="line"></span><br><span class="line">dataset = load_dataset(<span class="string">&quot;rotten_tomatoes&quot;</span>)  <span class="comment"># doctest: +IGNORE_RESULT</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>创建一个函数来对数据集进行标记化处理，然后使用map函数将其应用于整个数据集</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">tokenize_dataset</span>(<span class="params">dataset</span>):</span><br><span class="line">    <span class="keyword">return</span> tokenizer(dataset[<span class="string">&quot;text&quot;</span>])</span><br><span class="line"></span><br><span class="line">dataset = dataset.<span class="built_in">map</span>(tokenize_dataset, batched=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>使用DataCollatorWithPadding来从数据集中创建一个批次的示例</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> DataCollatorWithPadding</span><br><span class="line"><span class="comment"># DataCollatorWithPadding用于在训练过程中创建批次数据。它的作用是将不同长度的样本填充到相同长度，以便能够同时进行批处理</span></span><br><span class="line">data_collator = DataCollatorWithPadding(tokenizer=tokenizer)</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>最后组装到Trainer里</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> Trainer</span><br><span class="line"></span><br><span class="line">trainer = Trainer(</span><br><span class="line">    model=model,</span><br><span class="line">    args=training_args,</span><br><span class="line">    train_dataset=dataset[<span class="string">&quot;train&quot;</span>],</span><br><span class="line">    eval_dataset=dataset[<span class="string">&quot;test&quot;</span>],</span><br><span class="line">    tokenizer=tokenizer,</span><br><span class="line">    data_collator=data_collator,</span><br><span class="line">)  <span class="comment"># doctest: +SKIP</span></span><br><span class="line"></span><br><span class="line">trainer.train()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="dataset"><a href="#dataset" class="headerlink" title="dataset"></a>dataset</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装基础版</span></span><br><span class="line">pip install datasets</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装for声音</span></span><br><span class="line">pip install datasets[audio]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装for图像</span></span><br><span class="line">pip install datasets[vision]</span><br></pre></td></tr></table></figure>
+
+<h2 id="加载数据集"><a href="#加载数据集" class="headerlink" title="加载数据集"></a>加载数据集</h2><p>查看数据集描述</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datasets <span class="keyword">import</span> load_dataset_builder</span><br><span class="line">ds_builder = load_dataset_builder(<span class="string">&quot;rotten_tomatoes&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(ds_builder.info.description)</span><br><span class="line"><span class="built_in">print</span>(ds_builder.info.features)</span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Movie Review Dataset. This is a dataset of containing 5,331 positive and 5,331 negative processed sentences from Rotten Tomatoes movie reviews. This data was first used in Bo Pang and Lillian Lee, ``Seeing stars: Exploiting class relationships for sentiment categorization with respect to rating scales.&#x27;&#x27;, Proceedings of the ACL, 2005.</span><br><span class="line">&#123;&#x27;label&#x27;: ClassLabel(num_classes=2, names=[&#x27;neg&#x27;, &#x27;pos&#x27;], id=None),</span><br><span class="line"> &#x27;text&#x27;: Value(dtype=&#x27;string&#x27;, id=None)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>加载数据集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datasets <span class="keyword">import</span> load_dataset</span><br><span class="line"><span class="comment"># 通常，一个数据集会被划分为多个部分，比如训练集（train）、验证集（validation）和测试集（test）</span></span><br><span class="line"><span class="comment"># split 参数就是用来选择你想要加载的具体部分。</span></span><br><span class="line">dataset = load_dataset(<span class="string">&quot;rotten_tomatoes&quot;</span>, split=<span class="string">&quot;train&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以使用num_proc参数选择并行准备数据集时要使用的进程数</span></span><br><span class="line">imagenet = load_dataset(<span class="string">&quot;imagenet-1k&quot;</span>, num_proc=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+
+<p>查看数据集，一个数据下可能有很多子数据集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datasets <span class="keyword">import</span> get_dataset_config_names</span><br><span class="line"></span><br><span class="line">configs = get_dataset_config_names(<span class="string">&quot;PolyAI/minds14&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(configs)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#x27;cs-CZ&#x27;, &#x27;de-DE&#x27;, &#x27;en-AU&#x27;, &#x27;en-GB&#x27;, &#x27;en-US&#x27;, &#x27;es-ES&#x27;, &#x27;fr-FR&#x27;, &#x27;it-IT&#x27;, &#x27;ko-KR&#x27;, &#x27;nl-NL&#x27;, &#x27;pl-PL&#x27;, &#x27;pt-PT&#x27;, &#x27;ru-RU&#x27;, &#x27;zh-CN&#x27;, &#x27;all&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>加载指定子数据集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datasets <span class="keyword">import</span> load_dataset</span><br><span class="line"><span class="comment"># 指定子数据集是fr-FR</span></span><br><span class="line">mindsFR = load_dataset(<span class="string">&quot;PolyAI/minds14&quot;</span>, <span class="string">&quot;fr-FR&quot;</span>, split=<span class="string">&quot;train&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>load本地的json、csv文件等，可以load远程文件、sql等</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#&#123;&quot;version&quot;: &quot;0.1.0&quot;,</span></span><br><span class="line"><span class="comment"># &quot;data&quot;: [&#123;&quot;a&quot;: 1, &quot;b&quot;: 2.0, &quot;c&quot;: &quot;foo&quot;, &quot;d&quot;: false&#125;,</span></span><br><span class="line"><span class="comment">#          &#123;&quot;a&quot;: 4, &quot;b&quot;: -5.5, &quot;c&quot;: null, &quot;d&quot;: true&#125;]</span></span><br><span class="line"><span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> datasets <span class="keyword">import</span> load_dataset</span><br><span class="line">dataset = load_dataset(<span class="string">&quot;json&quot;</span>, data_files=<span class="string">&quot;my_file.json&quot;</span>, field=<span class="string">&quot;data&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="分布式加速Accelerate"><a href="#分布式加速Accelerate" class="headerlink" title="分布式加速Accelerate"></a>分布式加速Accelerate</h2><ul>
+<li>让模型训练在多种硬件配置上更高效地进行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install accelerate</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> accelerate <span class="keyword">import</span> Accelerator</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 定义加速器</span></span><br><span class="line">accelerator = Accelerator()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. dataloader包装</span></span><br><span class="line"><span class="comment"># prepare 方法会根据硬件配置（如多GPU或TPU）调整这些对象，使其能够在硬件资源上高效运行。</span></span><br><span class="line">train_dataloader, eval_dataloader, model, optimizer = accelerator.prepare(</span><br><span class="line">    train_dataloader, eval_dataloader, model, optimizer</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 反向传播</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):  <span class="comment"># 迭代训练轮数</span></span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> train_dataloader:</span><br><span class="line">        outputs = model(**batch)</span><br><span class="line">        loss = outputs.loss  <span class="comment"># 得到模型输出，并计算损失值（loss）</span></span><br><span class="line">        accelerator.backward(loss)  <span class="comment"># 反向传播计算梯度</span></span><br><span class="line"></span><br><span class="line">        optimizer.step()  <span class="comment"># 更新模型参数</span></span><br><span class="line">        lr_scheduler.step()  <span class="comment"># 更新学习率（如果使用了学习率调度器）</span></span><br><span class="line">        optimizer.zero_grad()  <span class="comment"># 清除优化器中的梯度缓存，以便下一次迭代</span></span><br><span class="line">        progress_bar.update(<span class="number">1</span>)  <span class="comment"># 更新进度条</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="diffusers"><a href="#diffusers" class="headerlink" title="diffusers"></a>diffusers</h2><ul>
+<li>扩散模型经过训练，可以逐步对随机高斯噪声进行去噪，以生成感兴趣的样本，例如图像或音频</li>
+</ul>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install diffusers</span><br></pre></td></tr></table></figure>
+
+<h3 id="DiffusionPipeline"><a href="#DiffusionPipeline" class="headerlink" title="DiffusionPipeline"></a>DiffusionPipeline</h3><ul>
+<li>是用预训练的扩散系统进行推理的最简单方法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> diffusers <span class="keyword">import</span> DiffusionPipeline</span><br><span class="line"></span><br><span class="line">pipeline = DiffusionPipeline.from_pretrained(<span class="string">&quot;runwayml/stable-diffusion-v1-5&quot;</span>)</span><br><span class="line"></span><br><span class="line">pipeline.to(<span class="string">&quot;cuda&quot;</span>)</span><br><span class="line">image = pipeline(<span class="string">&quot;An image of a squirrel in Picasso style&quot;</span>).images[<span class="number">0</span>]</span><br><span class="line">image.save(<span class="string">&quot;image_of_squirrel_painting.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>替换调度器</p>
+<ul>
+<li>在生成式模型中，调度器决定了如何在每个时间步添加和去除噪声。不同的调度器可以影响图像生成的质量和风格。通过替换调度器，可以实验不同的噪声添加和去除策略，以优化生成结果。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> diffusers <span class="keyword">import</span> EulerDiscreteScheduler</span><br><span class="line"></span><br><span class="line">pipeline = StableDiffusionPipeline.from_pretrained(<span class="string">&quot;runwayml/stable-diffusion-v1-5&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认是PNDMScheduler调度器</span></span><br><span class="line">pipeline.scheduler = EulerDiscreteScheduler.from_config(pipeline.scheduler.config)</span><br></pre></td></tr></table></figure>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> diffusers <span class="keyword">import</span> UNet2DModel</span><br><span class="line"></span><br><span class="line">repo_id = <span class="string">&quot;google/ddpm-cat-256&quot;</span></span><br><span class="line">model = UNet2DModel.from_pretrained(repo_id, use_safetensors=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/06/22/%E6%B5%81%E5%BC%8F%E4%BC%A0%E8%BE%93/">流式传输</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/06/05/python-override/">python-override</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">wangwenqq</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.27.0">Stellar 1.27.0</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#huggingface%E7%94%A8%E6%B3%95"><span class="toc-text">huggingface用法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD"><span class="toc-text">模型下载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-clone"><span class="toc-text">git clone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#huggingface-cli"><span class="toc-text">huggingface-cli</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#transformers"><span class="toc-text">transformers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pipline"><span class="toc-text">pipline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AtuoClass"><span class="toc-text">AtuoClass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AutoConfig"><span class="toc-text">AutoConfig</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tokenizer"><span class="toc-text">tokenizer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Trainer"><span class="toc-text">Trainer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dataset"><span class="toc-text">dataset</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">加载数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%8A%A0%E9%80%9FAccelerate"><span class="toc-text">分布式加速Accelerate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#diffusers"><span class="toc-text">diffusers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-1"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DiffusionPipeline"><span class="toc-text">DiffusionPipeline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B"><span class="toc-text">模型</span></a></li></ol></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js`,
+    marked: `https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.27.0" async></script>
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/flying-pages/2.1.2/flying-pages.min.js"></script><script defer src="https://cdn.bootcdn.net/ajax/libs/vanilla-lazyload/17.8.4/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.bootcdn.net/ajax/libs/fancyapps-ui/5.0.22/fancybox/fancybox.min.css`,
+    js: `https://cdn.bootcdn.net/ajax/libs/fancyapps-ui/5.0.22/fancybox/fancybox.umd.min.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || null
+        }
+      });
+    })
+  }
+</script><script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+    processEscapes: true
+  }
+});
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+});
+MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for(i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
